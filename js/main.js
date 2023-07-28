@@ -1,15 +1,15 @@
 // * RECUPERO GLI ELEMENTI DI INTERESSE
-const cellContainer = document.getElementById('cells-container');
+const cellsContainer = document.getElementById('cells-container');
 const generateGridButton = document.getElementById('generate-grid');
 const cellsCount = 64;
 
 // * GENERO LA GRIGLIA DI GIOCO
-generateGrid(cellsCount, cellContainer);
+generateGrid(cellsCount, cellsContainer);
 
 // # CLICK DI GENERATE GRID BUTTON
 
 generateGridButton.addEventListener('click', function () {
-  generateGrid(cellsCount, cellContainer);
+  generateGrid(cellsCount, cellsContainer);
 });
 
 // # FUNZIONI
@@ -65,8 +65,7 @@ function generateCell(cellNumber) {
 }
 
 /**
- * Funzione che genera un numero casuale considerando
- * un elenco di numeri esclusi
+ * Funzione che genera un numero casuale non ripetuto
  *
  * @param {int} min valore minimo
  * @param {int} max valore massimo
@@ -74,15 +73,19 @@ function generateCell(cellNumber) {
  * @returns {int} numero generato
  */
 function generateUniqueNumber(min, max, blacklist) {
-  if (blacklist.length >= max) {
+  const offset = max - min + 1;
+
+  // ? sono passato da "blacklist.length >= max" a "blacklist.length >= offset"
+  // ? perché il controllo sarebbe altrimenti stato fallato avendo "min > 1"
+  if (blacklist.length >= offset) {
     console.error('non è possibile generare un altro numero');
     return false;
   }
 
-  let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+  let randomNumber = Math.floor(Math.random() * offset) + min;
 
   while (blacklist.includes(randomNumber)) {
-    randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    randomNumber = Math.floor(Math.random() * offset) + min;
   }
 
   blacklist.push(randomNumber);
