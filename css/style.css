@@ -1,0 +1,48 @@
+:root {
+  --bg-body: #011627;
+  --bg-cell: #011627;
+  --bg-cell-odd: #ff0000;
+  --bg-cell-even: #7fffd4;
+}
+
+body {
+  color: white;
+  background-color: var(--bg-body);
+}
+
+.cells-list {
+  list-style-type: none;
+  
+
+  display: flex;
+  flex-wrap: wrap;
+
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0;
+  
+  border: 2px solid white;
+}
+
+.cells-list > .cell {
+  width: calc(100% / 8);
+  aspect-ratio: 1;
+
+  border: 2px solid white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.cells-list > .cell.cell-even {
+  background-color: var(--bg-cell-even);
+  color: #333;
+}
+
+
+.cells-list > .cell.cell-odd {
+  background-color: var(--bg-cell-odd);
+}
